@@ -1,11 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { CatsModule } from './cats/cats.module';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OperationsModule } from './operations/operations.module';
+import { AppGateway } from './app.gateway';
 @Module({
-  imports: [CatsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'sqljs',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
+    OperationsModule,
+  ],
+  providers: [AppGateway],
 })
 export class AppModule {}
