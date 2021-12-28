@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OperationsModule } from './operations/operations.module';
-import { AppGateway } from './app.gateway';
+import { ScheduleModule } from '@nestjs/schedule';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -9,8 +9,8 @@ import { AppGateway } from './app.gateway';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     OperationsModule,
   ],
-  providers: [AppGateway],
 })
 export class AppModule {}

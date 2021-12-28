@@ -1,10 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
-enum Statuses {
-  InProgress = 'In Progress',
-  Done = 'Done',
-  Failed = 'Failed',
-}
+import { Status } from './enums';
 
 @Entity('operations')
 export class Operation {
@@ -14,6 +9,6 @@ export class Operation {
   @Column()
   name: string;
 
-  @Column({ enum: Statuses, default: Statuses.InProgress })
-  status: Statuses;
+  @Column({ enum: Status, default: Status.InProgress })
+  status: Status;
 }
